@@ -1,0 +1,26 @@
+#useDynLib(NetWeaver)
+#exportPattern("^[[:alpha:]]+")
+export(
+	#functions for making circos plot
+	rc.initialize,
+	rc.reset.params,
+	rc.get.params,
+	rc.track.pos,
+	rc.plot.area,
+	rc.plot.histogram,
+	rc.plot.mHistogram,
+	rc.plot.heatmap,
+	rc.plot.ideogram,
+	rc.plot.track,
+	rc.plot.track.id,
+	rc.plot.text,
+	rc.plot.line,
+	rc.plot.link,
+	rc.plot.ribbon,
+	rc.plot.grColLegend,
+	rc.get.coordinates,
+	rc.get.ringCoordinates
+)
+importFrom("grDevices", "colors")
+importFrom("graphics", "lines", "par", "plot.new", "plot.window",
+	"polygon", "text", "points")
