@@ -8,7 +8,8 @@
 
 ### Example 1: curcular track plot
 ![Module ranking](ex1.circular.png)
-The above figure is generated from a real data analysis of featuring coexpression network modules. The number in the out-most ring shows the module id 1-50. The barplot in track #1 shows the module ranking score. The heat-map in track #2-5 shows module-trait correlation. The heat-map in the remaining tracks #6-29 show the P value significance of enrichment for various gene signatures.
+
+The above figure is generated from a real data analysis featuring coexpression network modules. The numbers in the out-most ring show the module id 1-50. The barplot in track #1 shows the module ranking score. The heat-map in track #2-5 shows module-trait correlation. The heat-map in the remaining tracks #6-29 show the P value significance of enrichment for various gene signatures.
 Detailed description about the data and sample code is available from
 `vignette("netweaver")` or `?Modules`.
 
