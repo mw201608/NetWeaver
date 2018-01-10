@@ -14,7 +14,7 @@
  \item{...}{further graphical parameters (from \code{\link{par}}), such as lty and lwd.}
 }
 \details{
-\code{Data} is a data.frame, with at least two columns named 'Chr' and 'Pos', specifying the chrosomal positoins for each line in every row. An additional column can be used to specify the line color. Default line length is determined by track height.
+\code{Data} is a data.frame, with at least two columns named 'Chr' and 'Pos', specifying the chromosomal positoins for each line in every row. An additional column can be used to specify the line color. Default line length is determined by track height.
 }
 \author{
 Minghui Wang <m.h.wang@live.com>

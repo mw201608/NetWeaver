@@ -1,7 +1,7 @@
 #plot histogram that across multiple chromosomes
 rc.plot.mHistogram=function(Data, track.id, data.col=NULL, color.col=NULL, color.gradient=NULL, fixed.height=FALSE, track.color=NA, track.border=NULL, custom.track.height=NULL, max.value=NULL){
 	rc.check.mHistogramData(Data,data.col,color.col)
-	rc.plot.track(track.id,border=track.border,col=track.color)
+	rc.plot.track(track.id,border=track.border,col=track.color,custom.track.height=custom.track.height)
 	rcPar=rc.get.params()
 	chromPar=rc.get.chrom()
 	if(is.null(data.col)) fixed.height=TRUE

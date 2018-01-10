@@ -3,7 +3,7 @@
 \alias{rc.get.params}
 \title{Get Parameters}
 \description{
-  Retrieve parameters of Circos plot.
+  Retrieve parameters of Circos plot after initialization.
 }
 \usage{rc.get.params()}
 \value{

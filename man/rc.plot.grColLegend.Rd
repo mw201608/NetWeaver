@@ -24,7 +24,7 @@
 \details{
 	\code{x} and \code{y} set the coordinates of bottom left starting point. The extremes of the user coordinates of the plotting region can be found out by \code{par('usr')}.
 	
-	By default NULL, parameter \code{at} will be set as a vector with values 1, \code{ceiling(length(cols)/2)}, and \code{length(cols)}.
+	By default \code{NULL}, parameter \code{at} will be set as a vector with values 1, \code{ceiling(length(cols)/2)}, and \code{length(cols)}.
 }
 \author{
 Minghui Wang <m.h.wang@live.com>

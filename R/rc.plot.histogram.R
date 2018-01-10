@@ -1,6 +1,6 @@
 rc.plot.histogram=function(Data, track.id, data.col=NULL, color.col=NULL, color.gradient=NULL, fixed.height=FALSE, track.color=NA, track.border=NULL, custom.track.height=NULL, max.value=NULL){
 	rc.check.histogramData(Data)
-	rc.plot.track(track.id,border=track.border,col=track.color)
+	rc.plot.track(track.id,border=track.border,col=track.color,custom.track.height=custom.track.height)
 	rcPar=rc.get.params()
 	if(is.null(data.col)) fixed.height=TRUE
 	if(is.null(max.value)) max.value=ifelse(fixed.height==TRUE && is.null(color.gradient),1,max(Data[,data.col],na.rm=TRUE))

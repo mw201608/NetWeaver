@@ -9,6 +9,7 @@ export(
 	rc.plot.area,
 	rc.plot.histogram,
 	rc.plot.mHistogram,
+	rc.plot.barchart,
 	rc.plot.heatmap,
 	rc.plot.ideogram,
 	rc.plot.track,
@@ -21,6 +22,6 @@ export(
 	rc.get.coordinates,
 	rc.get.ringCoordinates
 )
-importFrom("grDevices", "colors")
+importFrom("grDevices", "colors", "gray.colors")
 importFrom("graphics", "lines", "par", "plot.new", "plot.window",
 	"polygon", "text", "points")
