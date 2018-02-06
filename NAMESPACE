@@ -20,7 +20,8 @@ export(
 	rc.plot.ribbon,
 	rc.plot.grColLegend,
 	rc.get.coordinates,
-	rc.get.ringCoordinates
+	rc.get.ringCoordinates,
+	ensemble_rank
 )
 importFrom("grDevices", "colors", "gray.colors")
 importFrom("graphics", "lines", "par", "plot.new", "plot.window",
