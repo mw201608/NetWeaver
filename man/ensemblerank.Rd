@@ -2,7 +2,7 @@
 \alias{ensemble_rank}
 \title{Ensemble Rank}
 \description{
-  Cmpute composite rank score using evidence from multiple features.
+  Compute composite rank score using evidence from multiple features.
 }
 \usage{
   ensemble_rank(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),small=1.0e-320)

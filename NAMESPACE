@@ -21,7 +21,8 @@ export(
 	rc.plot.grColLegend,
 	rc.get.coordinates,
 	rc.get.ringCoordinates,
-	ensemble_rank
+	ensemble_rank,
+	is.overlap
 )
 importFrom("grDevices", "colors", "gray.colors")
 importFrom("graphics", "lines", "par", "plot.new", "plot.window",
