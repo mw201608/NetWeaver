@@ -22,9 +22,17 @@ where \code{Chr} is chromosome name, \code{Start} and \code{End} are the start a
 The stain is normally one of the "gneg", "acen", "stalk", "gvar", "gpos", "gpos100", "gpos75", "gpos66", "gpos50", "gpos33", and "gpos25", which will be plotted by color
 "white", "red", "steelblue", "lightgrey", "black", "black", "gray40", "gray50", "gray60", "gray70" and "gray80", accordingly. Customized colors for the cyto bands can be specified in
 an additional column named "\code{BandColor}".\cr\cr
-Through argument \code{params} additional plot settings can be specified, inculding: \code{color.line} (color for lines and links, default "black"), \code{chr.padding} (padding between chromsomes is a fraction of the total chromosome sizes, default 0.1),
-\code{track.padding} (paddings between tracks is a fraction of the track height, default 0.1), \code{track.height} (track height, default 0.15), and \code{radius} (radius of the circos, default 1).\cr\cr
-After initialization, the parameter settings can be retrieved by \code{\link{rc.get.params}}.\cr\cr
+Additional plot parameters can be specified through argument \code{params}, including:
+\itemize{
+\item \code{color.line}, color for lines and links, default "black".
+\item \code{chr.padding}, padding between chromsomes is a fraction of the total chromosome sizes, default 0.1.
+\item \code{track.padding}, paddings between tracks is a fraction of the track height, default 0.1
+\item \code{track.height}, track height, default 0.15.
+\item \code{radius} radius of the circos, default 1.
+\item \code{sector.degree}, a value between 0 and \code{2*Pi} (the default) specifying the circular sector size of the circos plot.
+}
+After initialization, the parameter settings can be retrieved by \code{\link{rc.get.params}}.
+
 Noted that while \code{cyto.info} requires input to be in a form of chromosome cytobands, the input is not limited to genomic features. As illustrated in example data \code{\link{Modules}}, complex features of gene coexpression network modules can also be plotted with the current circos visualization technique.
 }
 \author{
@@ -41,7 +49,7 @@ Cyto=data.frame(Chr=paste0('C',1:20), Start=1, End=100, BandColor=colors()[2:21]
 #firstly set number of tracks, should be larger than the actual number of tracks
 #used for plotting in order to leave sufficient sapce in the middle
 num.tracks=9 
-rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1))
+rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1,sector.degree=2*pi))
 
 ##retrieve parameters
 params=rc.get.params()

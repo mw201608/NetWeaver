@@ -23,6 +23,8 @@ rc.params.default=function(...){
 	if(is.null(params$num.tracks)) params$num.tracks = params$default.tracks
 	if(is.null(params$track.height)) params$track.height=params$default.track.height
 	if(is.null(params$radius)) params$radius = params$default.radius
+	if(is.null(params$sector.degree)) params$sector.degree = 2*pi
+	params$sector.degree=min(params$sector.degree,2*pi)
 	#
 	params
 }
