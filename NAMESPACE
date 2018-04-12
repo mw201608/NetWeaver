@@ -26,4 +26,4 @@ export(
 )
 importFrom("grDevices", "colors", "gray.colors")
 importFrom("graphics", "lines", "par", "plot.new", "plot.window",
-	"polygon", "text", "points")
+	"polygon", "text", "points","arrows")

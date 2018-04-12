@@ -86,7 +86,7 @@ LinkData=LinkData[LinkData$Chr1 != LinkData$Chr2,]
 params$color.line='blue'
 rc.reset.params(params)
 track.num=track.num+1
-rc.plot.link(LinkData, track.num, data.col=4)
+rc.plot.link(LinkData, track.num, data.col=4, arrow.length=0.1)
 ribbonData=data.frame(Chr1=c('C1','C3'), Start1=c(10,10), End1=c(40,40),
 	Chr2=c('C17','C10'), Start2=20, End2=60, Col=c('red','brown'))
 rc.plot.ribbon(ribbonData, track.num, color.col='Col', twist=TRUE)
@@ -95,5 +95,5 @@ rc.plot.track.id(2:7, col=2)
 #add text label
 rc.plot.text(data.frame(Chr='C3',Pos=50,Label='GeneX'), track.id=3,srt=45,cex=0.8,col='blue')
 #add line mark
-rc.plot.line(data.frame(Chr='C19',Pos=seq(10,90,by=10),Col='red'), track.id=3, color.col=3)
+rc.plot.line(data.frame(Chr='C19',Pos=seq(10,90,by=15),Col='red'), track.id=3, color.col=3,arrow.length=0.2)
 }
