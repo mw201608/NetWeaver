@@ -6,7 +6,7 @@
   Add a track of links on circos plot.
 }
 \usage{rc.plot.link(Data, track.id, data.col=NULL, color.col = NULL,
- max.lwd=1, sort.links=TRUE)}
+ max.lwd=1, sort.links=TRUE, arrow.length=0, arrow.angle=30, ...)}
 \arguments{
  \item{Data}{data.frame of at least four columns. See \code{Details}.}
  \item{track.id}{integer, the track number for plotting.}
@@ -14,6 +14,9 @@
  \item{color.col}{integer or character string, specifies the column of colors.}
  \item{max.lwd}{integer, maximum line width.}
  \item{sort.links}{logical, whether to re-assign link start and end positions by sorting them. See \code{details}}
+ \item{arrow.length}{length of the edges of the arrow head (in inches). See \code{\link{arrows}}}
+ \item{arrow.angle}{angle from the shaft of the arrow to the edge of the arrow head. See \code{\link{arrows}}}
+ \item{...}{further graphical parameters (from \code{\link{par}}), such as lty and lwd.}
 }
 \details{
 \code{Data} must have at least four columns: \code{Chr1}, \code{Pos1}, \code{Chr2} and \code{Pos2}, specifying the chromosomes and positions for the start and end points of the links. Additional columns may be used to specify the data, color and max line width.
