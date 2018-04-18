@@ -34,6 +34,7 @@ rc.plot.link=function(Data, track.id, data.col=NULL, color.col = NULL, max.lwd=1
 		if(arrow.length==0) next
 		n1=length(links$pos.x)
 		n2=max(0,n1-1)
+		if(swap[i]){n1=1;n2=2}
 		arrows(links$pos.x[n2], links$pos.y[n2], x1 = links$pos.x[n1], y1 = links$pos.y[n1],col = link.colors[i], lwd=lwd[i],length=arrow.length,angle=arrow.angle,...)
 	}
 }
