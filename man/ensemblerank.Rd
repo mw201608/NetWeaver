@@ -5,12 +5,14 @@
   Compute composite rank score using evidence from multiple features.
 }
 \usage{
-  ensemble_rank(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),small=1.0e-320)
+  ensemble_rank(x, method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),
+  small=1.0e-320, standardize=TRUE)
 }
 \arguments{
  \item{x}{a matrix of discriminant values (e.g., P values) measuring the strength of the association between objects (eg modules) (in rows) and variables/features (in columns).}
  \item{method}{a character string specifyign the ranking metric. See \code{Details}.}
  \item{small}{offset the small p values before taking log transformation.}
+ \item{standardize}{whether to rescale the final ranking score by dividing the maximum value.}
 }
 \details{
 Three ranking metrics are currently implemented:
@@ -22,7 +24,7 @@ MeanOfLog computes the mean of -log(p value) which penalizes insignificant p val
 MeanOfLogLog computes the mean of log(-log(p value)) which penalizes insignificant p values and shrinks the difference in the ranges of p values.
 }
 \value{
- A vector of ranking scores between 0 to 1. The larger the score, the higher the rank.
+ A vector of ranking scores. The larger the score, the higher the rank.
 }
 \author{
 Minghui Wang <m.h.wang@live.com>
