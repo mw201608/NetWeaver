@@ -69,14 +69,14 @@ options(stringsAsFactors=FALSE)
 
 **Set up example data and colors**
 ```
-dat=c(Perl=0.2,Bash=0.3,Python=0.1,Mathematica=0.1,MySQL=0.15,Latex=0.15)*100
+dat=c(Perl=0.2, Bash=0.3, Python=0.1, Mathematica=0.1, MySQL=0.15, Latex=0.15)*100
 cols=brewer.pal(length(dat)+1,'Dark2')
 Cyto=data.frame(Chr=names(dat), Start=1, End=dat, BandColor=cols[1:length(dat)])
 ```
 **Initialize**
 
 ```
-rc.initialize(Cyto, num.tracks=3, params=list(chr.padding=0,track.padding=0,track.height=0.29))
+rc.initialize(Cyto, num.tracks=3, params=list(chr.padding=0.1, track.padding=0, track.height=0.29))
 ```
 
 **Make plot area**
@@ -88,9 +88,9 @@ rc.plot.area()
 **Plot outer layer**
 
 ```
-rc.plot.histogram(Cyto,track.id=2,color.col='BandColor',track.border=NA)
-textData=data.frame(Chr=Cyto$Chr,Pos=Cyto$End/2,Label=names(dat))
-rc.plot.text(textData, track.id=2.5, col='white')
+rc.plot.histogram(Cyto, track.id=2, color.col='BandColor', track.border=NA, polygon.border=NA)
+textData=data.frame(Chr=Cyto$Chr, Pos=Cyto$End/2, Label=names(dat))
+rc.plot.text(textData, track.id=2.5, col='white', cex=0.6)
 ```
 
 **Print circle and text in the middle**

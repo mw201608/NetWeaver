@@ -96,7 +96,7 @@ As canvas is ready, we can plot ideogram of chromosome cytoband in the out-most 
 ```{r ch2, eval=FALSE}
 chrom.alias=1:nrow(cyto)
 names(chrom.alias)=cyto$Chr
-rc.plot.ideogram(track.ids=1:2, plot.band=FALSE, plot.chromosome.id=TRUE, cex.text=1.0, chrom.alias=chrom.alias, track.border=NA)
+rc.plot.ideogram(track.ids=1:2, plot.band=FALSE, plot.chromosome.id=TRUE, cex.text=1.0, chrom.alias=chrom.alias, track.border=NA, polygon.border=NA)
 ```
 ```{r fig1, ref.label=c("ch1","ch2"), fig.cap = "Figure 1. Ideogram", echo=FALSE}
 ```
@@ -106,7 +106,7 @@ rc.plot.ideogram(track.ids=1:2, plot.band=FALSE, plot.chromosome.id=TRUE, cex.te
 Next to ideogram, let us plot module ranking score using a barchart in tracks 4 to 2:
 ```{r chunk1, eval=FALSE}
 Rank=data.frame(cyto[,c("Chr","Start","End")], Score=Modules$Score, stringsAsFactors=FALSE)
-rc.plot.histogram(Rank, track.id=4, data.col="Score", fixed.height=FALSE, custom.track.height=params$track.height*3, track.border=NA)
+rc.plot.histogram(Rank, track.id=4, data.col="Score", fixed.height=FALSE, custom.track.height=params$track.height*3, track.border=NA, polygon.border=NA)
 ```
 ```{r fig2, ref.label=c("ch1","ch2","chunk1"), fig.cap = "Figure 2. Module ranking", echo=FALSE}
 ```
@@ -131,13 +131,13 @@ for(eigenCorCol in eigenCorCols){
 	HistData1=HistData[HistData$Data > 0,]
 	HistData1$col=colfuncBrown(nCol)[pmax(1,floor(HistData1[,data.col]*nCol/maxCorr))]
 	rc.plot.histogram(HistData1, track.num, data.col, color.col=color.col,
-		fixed.height=TRUE, track.color=track.color, track.border=track.border)
+		fixed.height=TRUE, track.color=track.color, track.border=track.border, polygon.border=NA)
 	#plot negative correlation
 	HistData2=HistData[HistData$Data <= 0,]
 	HistData2$Data=abs(HistData2$Data)
 	HistData2$col=colfuncBlue(nCol)[pmax(1,floor(HistData2[,data.col]*nCol/maxCorr))]
 	rc.plot.histogram(HistData2, track.num, data.col, color.col=color.col, fixed.height=TRUE,
-		track.border=track.border)
+		track.border=track.border, polygon.border=NA)
 }
 ```
 ```{r fig3, ref.label=c("ch1","ch2","chunk1","chunk2"), fig.cap = "Figure 3. Correlation coeffcients", echo=FALSE}
@@ -172,7 +172,7 @@ maxLogPval=25
 heatmapData[heatmapData>maxLogPval]=maxLogPval
 #
 rc.plot.heatmap(heatmapData, track.num, color.gradient=colfuncHeat(nCol),
-		track.color=track.color, track.border=track.border)
+		track.color=track.color, track.border=track.border, polygon.border=NA)
 track.num=track.num+nrow(heatmapData)
 ```
 ```{r fig5, ref.label=c("ch1","ch2","chunk1","chunk2","chunk3","chunk4"), fig.cap = "Figure 5. Enrichment for gene signatures", echo=FALSE}
