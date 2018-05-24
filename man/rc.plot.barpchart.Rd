@@ -7,7 +7,8 @@
 }
 \usage{
 rc.plot.barchart(Data, track.id, data.col, color.col=NULL, bar.color=NULL,
-	track.color=NA, track.border=NULL, custom.track.height=NULL, ratio=FALSE)
+	track.color=NA, track.border=NULL, polygon.border=NULL,
+	custom.track.height=NULL, ratio=FALSE)
 }
 \arguments{
  \item{Data}{data.frame, data to be plotted. See \code{Details}.}
@@ -17,6 +18,7 @@ rc.plot.barchart(Data, track.id, data.col, color.col=NULL, bar.color=NULL,
  \item{bar.color}{a vector of colors for the bars or bar components. By default, \code{grey} is used if there is one data column, and a gamma-corrected grey palette if there are multiple columns of data.}
  \item{track.color}{NA or color code for the track background.}
  \item{track.border}{the color to draw the track border. Use \code{NA} to omit borders.}
+ \item{polygon.border}{the color to draw the polygon border. See explanation for \code{\link[graphics]{polygon}}.}
  \item{custom.track.height}{NULL or numeric, specifying customized track height to overwrite the default. See \code{\link{rc.get.params}} for default value.}
  \item{ratio}{logical, specifying whether the data values in each row should be converted to ratios. Used only for stacked barchart.}
 }

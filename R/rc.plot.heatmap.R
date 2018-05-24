@@ -1,4 +1,4 @@
-rc.plot.heatmap=function(Data, track.id, color.gradient=NULL, track.color=NA, track.border=NULL){
+rc.plot.heatmap=function(Data, track.id, color.gradient=NULL, track.color=NA, track.border=NULL, polygon.border=NULL){
 	Data=as.matrix(Data)
 	rc.check.heatmapData(Data)
 	chromPar=rc.get.chrom()
@@ -20,7 +20,7 @@ rc.plot.heatmap=function(Data, track.id, color.gradient=NULL, track.color=NA, tr
 			HistData[,color.col]=Data[i,]
 		}
 		rc.plot.histogram(HistData, track.id+i-1, color.col=color.col, fixed.height=TRUE,
-			track.color=track.color, track.border=track.border)
+			track.color=track.color, track.border=track.border, polygon.border=polygon.border)
 	}
 }
 rc.check.heatmapData=function(Data){

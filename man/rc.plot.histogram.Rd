@@ -8,7 +8,7 @@
 \usage{
 rc.plot.histogram(Data, track.id, data.col=NULL, color.col=NULL,
  color.gradient=NULL, fixed.height=FALSE, track.color=NA, track.border=NULL,
- custom.track.height=NULL, max.value=NULL)
+ polygon.border=NULL, custom.track.height=NULL, max.value=NULL)
 }
 \arguments{
  \item{Data}{data.frame, data to be plotted. See \code{Details}.}
@@ -19,6 +19,7 @@ rc.plot.histogram(Data, track.id, data.col=NULL, color.col=NULL,
  \item{fixed.height}{logical, whether to fix the histogram height which results in heat-map. \code{TRUE} if \code{data.col} is \code{bar.color}.}
  \item{track.color}{NA or color code for the track background.}
  \item{track.border}{the color to draw the track border. Use \code{NA} to omit borders.}
+ \item{polygon.border}{the color to draw the polygon border. See explanation for \code{\link[graphics]{polygon}}.}
  \item{custom.track.height}{NULL or numeric, specifying customized track height to overwrite the default. See \code{\link{rc.get.params}} for default value.}
  \item{max.value}{NULL or numeric, specifying the maximum data value for normalization. Default NULL, get max from data column.}
 }

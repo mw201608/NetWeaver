@@ -7,7 +7,7 @@ rc.get.ringCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,ringThic
 	if(is.null(degree)){
 		apos=0
 		if(! is.null(Chr)) apos=rc.get.cumLoc(Chr,0)
-		cumStart=Start+apos
+		cumStart=Start+apos-1
 		cumEnd=End+apos
 		#
 		baseUnits=rc.get.baseUnits()
