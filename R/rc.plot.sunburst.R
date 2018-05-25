@@ -1,4 +1,4 @@
-rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.color.data=NULL, polygon.border=NULL){
+rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, polygon.border=NULL, show.label=FALSE, legend.title='Color'){
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
 	if(is.null(root)){
@@ -10,17 +10,21 @@ rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=fu
 	nodes=data.frame(Node=nodes,Leaf=(!nodes %in% Data$parent),stringsAsFactors = FALSE)
 	nodes$DS=1
 	rownames(nodes)=nodes$Node
-	if(!is.null(color.vector)){
-		nodes=data.frame(nodes,color.col=color.vector[nodes$Node],stringsAsFactors = FALSE)
+	if(is.null(rect.data)){
+		d1=NA
 	}else{
-		if(is.null(rect.color.data)){
-			nodes=data.frame(nodes,color.col=sample(rect.color.func(nrow(nodes))),stringsAsFactors = FALSE)
+		d1=Data[match(nodes$Node,Data$child),rect.data]
+	}
+	if(!is.null(color.vector)){
+		nodes=data.frame(nodes,color.col=color.vector[nodes$Node],rect.data=d1,stringsAsFactors = FALSE)
+	}else{
+		if(is.null(rect.data)){
+			nodes=data.frame(nodes,color.col=sample(rect.color.func(nrow(nodes))),rect.data=NA,stringsAsFactors = FALSE)
 		}else{
-			d1=Data[match(nodes$Node,Data$child),rect.color.data]
 			ncolors=length(rect.color.func())
-			d1=ceiling(d1*ncolors/max(d1,na.rm=TRUE))
-			d1[which(d1==0)]=1
-			nodes=data.frame(nodes,color.col=rect.color.func()[d1],stringsAsFactors = FALSE)
+			d2=ceiling(d1*ncolors/ceiling(max(d1,na.rm=TRUE)))
+			d2[which(d2==0)]=1
+			nodes=data.frame(nodes,color.col=rect.color.func()[d2],rect.data=d1,stringsAsFactors = FALSE)
 		}
 	}
 	#
@@ -54,19 +58,36 @@ rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=fu
 	for(iLayer in 1:nLayer){
 		if(iLayer==1){
 			rc.plot.histogram(Cyto1,track.id=nLayer-iLayer+2,color.col='BandColor',track.border=NA, polygon.border=polygon.border)
+			if(show.label){
+				textData=data.frame(Chr=Cyto1$Chr, Pos=(Cyto1$Start+Cyto1$End)/2, Label=rownames(Cyto1),stringsAsFactors=FALSE)
+				if(! is.null(rect.data.cutoff)){
+					textData=textData[which(nodes[rownames(Cyto1),'rect.data'] >= rect.data.cutoff),]
+				}
+				if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
+			}
 			next
 		}
 		i = which(Data$layer==iLayer)
-		pp = unique(Data$parent[i])
-		for(p in pp){
+		for(p in unique(Data$parent[i])){
 			pc=Data$child[i][Data$parent[i]==p]
-			Cyto2=data.frame(Chr=Cyto1[p,'Chr'],End=nodes[pc,'DS'], Start=nodes[pc,'DS'], BandColor=nodes[pc,'color.col'])
+			Cyto2=data.frame(Chr=Cyto1[p,'Chr'],End=nodes[pc,'DS'], Start=nodes[pc,'DS'], BandColor=nodes[pc,'color.col'],stringsAsFactors=FALSE)
 			Cyto2$Start=Cyto1[p,'Start']+c(0,cumsum(Cyto2$End))[1:length(Cyto2$End)]
 			Cyto2$End=Cyto2$Start+Cyto2$End-1
 			rownames(Cyto2)=pc
 			Cyto2$Layer=iLayer
 			Cyto1=rbind(Cyto1,Cyto2)
 		}
-		rc.plot.histogram(Cyto1[Cyto1$Layer==iLayer,],track.id=nLayer-iLayer+2,color.col='BandColor',track.border=NA, polygon.border=polygon.border)
+		Cyto2=Cyto1[Cyto1$Layer==iLayer,]
+		rc.plot.histogram(Cyto2,track.id=nLayer-iLayer+2,color.col='BandColor',track.border=NA, polygon.border=polygon.border)
+		if(show.label){
+			textData=data.frame(Chr=Cyto2$Chr, Pos=(Cyto2$Start+Cyto2$End)/2, Label=rownames(Cyto2),stringsAsFactors=FALSE)
+			if(! is.null(rect.data.cutoff)){
+				textData=textData[which(nodes[rownames(Cyto2),'rect.data'] >= rect.data.cutoff),]
+			}
+			if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
+		}
 	}
+	cols=rect.color.func()
+	if(is.null(color.vector) && ! is.null(rect.data)) rc.plot.grColLegend(0.8, 0.9, cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(0,ceiling(max(d1,na.rm=TRUE))/2,ceiling(max(d1,na.rm=TRUE))),
+		title=legend.title, cex.text=0.8)
 }
