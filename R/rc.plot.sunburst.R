@@ -1,4 +1,4 @@
-rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, polygon.border=NULL, show.label=FALSE, 
+rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,
 legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical'){
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
@@ -61,8 +61,12 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			rc.plot.histogram(Cyto1,track.id=nLayer-iLayer+2,color.col='BandColor',track.border=NA, polygon.border=polygon.border)
 			if(show.label){
 				textData=data.frame(Chr=Cyto1$Chr, Pos=(Cyto1$Start+Cyto1$End)/2, Label=rownames(Cyto1),stringsAsFactors=FALSE)
-				if(! is.null(rect.data.cutoff)){
-					textData=textData[which(nodes[rownames(Cyto1),'rect.data'] >= rect.data.cutoff),]
+				if(!is.null(show.label.selected)){
+					textData=textData[textData$Label %in% show.label.selected,]
+				}else{
+					if(! is.null(rect.data.cutoff)){
+						textData=textData[which(nodes[rownames(Cyto1),'rect.data'] >= rect.data.cutoff),]
+					}
 				}
 				if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
 			}
@@ -82,8 +86,12 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 		rc.plot.histogram(Cyto2,track.id=nLayer-iLayer+2,color.col='BandColor',track.border=NA, polygon.border=polygon.border)
 		if(show.label){
 			textData=data.frame(Chr=Cyto2$Chr, Pos=(Cyto2$Start+Cyto2$End)/2, Label=rownames(Cyto2),stringsAsFactors=FALSE)
-			if(! is.null(rect.data.cutoff)){
-				textData=textData[which(nodes[rownames(Cyto2),'rect.data'] >= rect.data.cutoff),]
+			if(!is.null(show.label.selected)){
+				textData=textData[textData$Label %in% show.label.selected,]
+			}else{
+				if(! is.null(rect.data.cutoff)){
+					textData=textData[which(nodes[rownames(Cyto2),'rect.data'] >= rect.data.cutoff),]
+				}
 			}
 			if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
 		}
