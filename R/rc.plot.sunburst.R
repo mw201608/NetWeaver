@@ -1,20 +1,32 @@
-rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,
+rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, rect.data.min=NULL,rect.data.max=NULL,
+polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,
 legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical'){
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
 	if(is.null(root)){
-		root <- Data$parent[!Data$parent %in% Data$child]
+		root <- Data$parent[!Data$parent %in% Data$child[Data$parent != Data$child]]
 		root=unique(root)
 	}
 	#
 	nodes=union(Data$parent,Data$child)
 	nodes=data.frame(Node=nodes,Leaf=(!nodes %in% Data$parent),stringsAsFactors = FALSE)
+	Data=Data[Data$parent != Data$child,]
 	nodes$DS=1
 	rownames(nodes)=nodes$Node
 	if(is.null(rect.data)){
 		d1=NA
 	}else{
 		d1=Data[match(nodes$Node,Data$child),rect.data]
+		if(is.null(rect.data.min)){
+			rect.data.min <- min(d1,na.rm=TRUE)
+			rect.data.min <- floor(rect.data.min)
+		}
+		if(is.null(rect.data.max)){
+			rect.data.max <- max(d1,na.rm=TRUE)
+			rect.data.max <- ceiling(rect.data.max)
+		}
+		d1[d1<rect.data.min]=rect.data.min
+		d1[d1>rect.data.max]=rect.data.max
 	}
 	if(!is.null(color.vector)){
 		nodes=data.frame(nodes,color.col=color.vector[nodes$Node],rect.data=d1,stringsAsFactors = FALSE)
@@ -23,7 +35,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			nodes=data.frame(nodes,color.col=sample(rect.color.func(nrow(nodes))),rect.data=NA,stringsAsFactors = FALSE)
 		}else{
 			ncolors=length(rect.color.func())
-			d2=ceiling(d1*ncolors/ceiling(max(d1,na.rm=TRUE)))
+			d2=ceiling((d1-rect.data.min)*ncolors/(rect.data.max-rect.data.min))
 			d2[which(d2==0)]=1
 			nodes=data.frame(nodes,color.col=rect.color.func()[d2],rect.data=d1,stringsAsFactors = FALSE)
 		}
@@ -97,6 +109,6 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 		}
 	}
 	cols=rect.color.func()
-	if(is.null(color.vector) && ! is.null(rect.data)) rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(0,ceiling(max(d1,na.rm=TRUE))/2,ceiling(max(d1,na.rm=TRUE))),
+	if(is.null(color.vector) && ! is.null(rect.data)) rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
 		width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
 }
