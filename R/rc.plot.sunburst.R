@@ -112,3 +112,24 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	if(is.null(color.vector) && ! is.null(rect.data)) rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
 		width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
 }
+#
+rc.sunburst.hierarchy=function(Data, root=NULL){
+	stopifnot(is.data.frame(Data))
+	colnames(Data)[1:2]=c('child','parent')
+	if(is.null(root)){
+		root <- Data$parent[!Data$parent %in% Data$child[Data$parent != Data$child]]
+		root=unique(root)
+		print(root)
+	}
+	#
+	Data=Data[Data$parent != Data$child,]
+	findChild=function(x,p,s=NULL){
+		if(is.null(s)) s=x
+		c1=p$child[p$parent==x]
+		if(length(c1)==0) return(s)
+		unlist(sapply(c1,findChild,p=p,s=paste0(s,'-',c1)))
+	}
+	hierarchy=do.call(c,lapply(root,findChild,p=Data))
+	#return(hierarchy)
+	data.frame(hierarchy=hierarchy,Data[match(sapply(hierarchy,function(x) tail(strsplit(x,'-')[[1]],n=1)),Data$child),],stringsAsFactors=FALSE)
+}
