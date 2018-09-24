@@ -24,6 +24,7 @@ export(
 	ensemble_rank,
 	is.overlap
 )
+importFrom("utils", "tail")
 importFrom("grDevices", "colors", "gray.colors", "heat.colors")
 importFrom("graphics", "lines", "par", "plot.new", "plot.window",
-	"polygon", "text", "points","arrows")
+	"polygon", "text", "points","arrows","legend")

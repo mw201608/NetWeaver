@@ -13,9 +13,8 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	Data=Data[Data$parent != Data$child,]
 	nodes$DS=1
 	rownames(nodes)=nodes$Node
-	if(is.null(rect.data)){
-		d1=NA
-	}else{
+	d1=NA
+	if(!is.null(rect.data)){
 		d1=Data[match(nodes$Node,Data$child),rect.data]
 		if(is.null(rect.data.min)){
 			rect.data.min <- min(d1,na.rm=TRUE)
@@ -34,10 +33,14 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 		if(is.null(rect.data)){
 			nodes=data.frame(nodes,color.col=sample(rect.color.func(nrow(nodes))),rect.data=NA,stringsAsFactors = FALSE)
 		}else{
-			ncolors=length(rect.color.func())
-			d2=ceiling((d1-rect.data.min)*ncolors/(rect.data.max-rect.data.min))
-			d2[which(d2==0)]=1
-			nodes=data.frame(nodes,color.col=rect.color.func()[d2],rect.data=d1,stringsAsFactors = FALSE)
+			if(is.numeric(Data[,rect.data])){
+				ncolors=length(rect.color.func())
+				d2=ceiling((d1-rect.data.min)*ncolors/(rect.data.max-rect.data.min))
+				d2[which(d2==0)]=1
+				nodes=data.frame(nodes,color.col=rect.color.func()[d2],rect.data=d1,stringsAsFactors = FALSE)
+			}else{
+				nodes=data.frame(nodes,color.col=rect.color.func()[Data[,rect.data]],rect.data=d1,stringsAsFactors = FALSE)
+			}
 		}
 	}
 	#
@@ -108,9 +111,18 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
 		}
 	}
-	cols=rect.color.func()
-	if(is.null(color.vector) && ! is.null(rect.data)) rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
-		width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
+	if(is.null(color.vector) && ! is.null(rect.data)){
+		cols=rect.color.func()
+		if(is.numeric(Data[,rect.data])){
+			rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
+			width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
+		}else{
+			legend(legend.x,legend.y,legend=names(cols),pch=19,col=cols)
+		}
+	}
+	if(!is.null(color.vector)){
+		legend(legend.x,legend.y,legend=names(color.vector),pch=19,col=color.vector)
+	}
 }
 #
 rc.sunburst.hierarchy=function(Data, root=NULL){
