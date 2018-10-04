@@ -17,6 +17,7 @@ export(
 	rc.plot.text,
 	rc.plot.line,
 	rc.plot.link,
+	rc.plot.point,
 	rc.plot.ribbon,
 	rc.plot.grColLegend,
 	rc.get.coordinates,

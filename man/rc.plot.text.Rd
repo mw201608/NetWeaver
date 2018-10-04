@@ -9,7 +9,7 @@
 \arguments{
  \item{Data}{a data.frame. See \code{Details}.}
  \item{track.id}{a vector of integers, specifying the tracks for plotting text.}
- \item{col}{color for the text.}
+ \item{col}{a vector of color for the text.}
  \item{custom.track.height}{NULL or numeric, specifying customized track height.}
  \item{...}{further graphical parameters (from \code{\link{par}}), such as srt and family.}
 }

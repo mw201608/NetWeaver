@@ -1,6 +1,8 @@
-rc.initialize=function(cyto.info,num.tracks=NULL,chr.order=NULL,stepUnit=10^7,params=list()){
+rc.initialize=function(cyto.info,num.tracks=NULL,chr.order=NULL,stepUnit=10^7,Layout=c('circular','landscape'),params=list()){
+	Layout=match.arg(Layout)
 	rc.check.cytoband(cyto.info)
 	params <- rc.params.default(params)
+	params$Layout <- Layout
 	#
 	if(!is.null(num.tracks)){
 		num.tracks=as.integer(num.tracks)

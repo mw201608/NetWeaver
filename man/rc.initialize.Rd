@@ -7,13 +7,14 @@
 }
 \usage{
 rc.initialize(cyto.info, num.tracks=NULL, chr.order=NULL, 
-	stepUnit=10^7, params=list())
+	stepUnit=10^7, Layout=c('circular','landscape'), params=list())
 }
 \arguments{
  \item{cyto.info}{data.frame, see \code{Details}.}
  \item{num.tracks}{integer, number of tracks.}
  \item{chr.order}{character vector of chromosome ids specifying the ordering of chromosomes.}
  \item{stepUnit}{integer, smoothing factor for faster plotting.}
+ \item{Layout}{layout for plotting.}
  \item{params}{a list of named items. See \code{Details}.}
 }
 \details{

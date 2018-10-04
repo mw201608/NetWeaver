@@ -2,11 +2,12 @@ rc.plot.text=function(Data, track.id, col='black', custom.track.height=NULL, ...
 	rc.check.textData(Data)
 	rcPar=rc.get.params()
 	if(is.null(custom.track.height)) custom.track.height=rcPar$track.height
+	if(length(col) < nrow(Data)) col=rep(col,length.out=nrow(Data))
 	for(i in 1:nrow(Data)){
 		Chr=Data[i,'Chr']
 		Start=Data[i,'Pos']
 		pos.xy <- rc.get.ringCoordinates(track.id,Start=Start,End=Start,Chr=Chr,ringThickness=custom.track.height)
-		text(pos.xy$x[1], pos.xy$y[1], labels=Data[i,'Label'], col=col, ...);
+		text(pos.xy$x[1], pos.xy$y[1], labels=Data[i,'Label'], col=col[i], ...);
 	}
 	return(invisible())
 }
