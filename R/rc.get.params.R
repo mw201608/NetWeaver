@@ -14,7 +14,8 @@ rc.params.default=function(...){
 	#
 	params$default.tracks=4
 	params$default.track.height=0.15
-	params$default.radius=1
+	params$default.radius=1 #this is also used as y-axis length for the landscape Layout
+	params$default.x.length=1 #only used for the landscape Layout
 	#
 	if(is.null(params$color.line)) params$color.line="black"
 	if(is.null(params$color.hist)) params$color.hist="red"

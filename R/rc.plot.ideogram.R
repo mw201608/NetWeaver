@@ -12,19 +12,31 @@ rc.plot.ideogram=function(track.ids, plot.band=TRUE, plot.chromosome.id=TRUE, ch
 		Chr=names(chromPar)[i]
 		if(! is.null(chrom.alias)) Chr=chrom.alias[Chr]
 		iChr=chromPar[[i]]
-		Start = iChr['cumStart']
-		mid = floor((iChr['End'] - iChr['Start'] + 1)/2 + iChr['cumStart'])
-		pos.xy <- rc.get.coordinates(track.ids[1],Pos=mid,innerSide=FALSE)
-		pos=c(mean(pos.xy$x),mean(pos.xy$y))
-		if (las==1){
-			srt=0
-		}else if (las==2){
-			srt=rc.compute.degree(mid) * 180/pi
-		}else if (las==3){
-			srt=90
-		}else{ #default
-			srt = rc.compute.degree(mid) * 180/pi - 90
+		if(rcPar$Layout=='circular'){
+			mid = floor((iChr['End'] - iChr['Start'] + 1)/2 + iChr['cumStart'])
+			pos.xy <- rc.get.coordinates(track.ids[1],Pos=mid,innerSide=FALSE)
+			if (las==1){
+				srt=0
+			}else if (las==2){
+				srt=rc.compute.degree(mid) * 180/pi
+			}else if (las==3){
+				srt=90
+			}else{ #default
+				srt = rc.compute.degree(mid) * 180/pi - 90
+			}
+		}else{
+			pos.xy <- rc.get.coordinates(track.ids[1],Chr=c(Chr,Chr),Pos=c(iChr['Start'],iChr['End']),bottomSide=FALSE)
+			if (las==1){
+				srt=0
+			}else if (las==2){
+				srt=90
+			}else if (las==3){
+				srt=90
+			}else{ #default
+				srt = 0
+			}
 		}
+		pos=c(mean(pos.xy$x),mean(pos.xy$y))
 		text(pos[1], pos[2], label = Chr,col=color.chromosome.id[Chr],
 			srt = srt, cex=cex.text)
 	}

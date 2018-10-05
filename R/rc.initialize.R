@@ -9,7 +9,9 @@ rc.initialize=function(cyto.info,num.tracks=NULL,chr.order=NULL,stepUnit=10^7,La
 		if(num.tracks > params$default.tracks){
 			params$num.tracks=num.tracks
 			if(params$Layout=='circular') params$radius = params$default.radius + params$track.height * (1+params$track.padding) * (num.tracks - params$default.tracks)
-			if(params$Layout=='landscape') params$track.height = params$default.radius / params$num.tracks / (1+params$track.padding)
+			if(params$Layout=='landscape'){
+				params$track.height = params$default.radius / params$num.tracks / (1+params$track.padding)
+			}
 		}
 	}
 	#
@@ -19,6 +21,6 @@ rc.initialize=function(cyto.info,num.tracks=NULL,chr.order=NULL,stepUnit=10^7,La
 	rcEnvirInternal[["rcParams"]] <- params
 	rcEnvirInternal[["chromPar"]] <- cPar$chromPar
 	#stepSize, the size of move along the chromosomes when plotting
-	rcEnvirInternal[["baseUnits"]] <- list(halfPi=pi/2,unitDegree=params$sector.degree/cPar$totalLen,totalChrLength=cPar$totalLen,stepSize=ceiling(cPar$totalLen/stepUnit))
+	rcEnvirInternal[["baseUnits"]] <- list(halfPi=pi/2,unitDegree=params$sector.degree/cPar$totalLen,unitLenX=params$default.x.length/cPar$totalLen,totalChrLength=cPar$totalLen,stepSize=ceiling(cPar$totalLen/stepUnit))
 	return(invisible())
 }
