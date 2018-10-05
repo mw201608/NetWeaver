@@ -6,7 +6,7 @@ rc.plot.text=function(Data, track.id, col='black', custom.track.height=NULL, ...
 	for(i in 1:nrow(Data)){
 		Chr=Data[i,'Chr']
 		Start=Data[i,'Pos']
-		pos.xy <- rc.get.ringCoordinates(track.id,Start=Start,End=Start,Chr=Chr,ringThickness=custom.track.height)
+		pos.xy <- rc.get.trackCoordinates(track.id,Start=Start,End=Start,Chr=Chr,trackThickness=custom.track.height)
 		text(pos.xy$x[1], pos.xy$y[1], labels=Data[i,'Label'], col=col[i], ...);
 	}
 	return(invisible())

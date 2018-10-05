@@ -1,5 +1,5 @@
 #get x,y-coordinates of the two rings for a given chromosome location/fragment in a track
-rc.get.ringCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,ringThickness=NULL){
+rc.get.trackCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,trackThickness=NULL){
 #track.id, number of track from outermost
 #Chr, chromosome
 #Start/End, position on the chromosome
@@ -19,10 +19,10 @@ rc.get.ringCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,ringThic
 	xCos=cos(degree)
 	ySin=sin(degree)
 	#
-	if(is.null(ringThickness)) ringThickness=rc.get.params()$track.height
+	if(is.null(trackThickness)) trackThickness=rc.get.params()$track.height
 	track.pos = rc.track.pos(track.id)
 	inner.location=track.pos['in.pos']
-	outer.location=inner.location+ringThickness
+	outer.location=inner.location+trackThickness
 	#
 	pos.x <- c(xCos*outer.location, rev(xCos)*inner.location);
 	pos.y <- c(ySin*outer.location, rev(ySin)*inner.location);
@@ -43,7 +43,7 @@ rc.get.cumLoc=function(Chr,pos){
 	pos
 }
 #compute the coordinates of a cumulative location in a track
-rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE){
+rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bottomSide=TRUE){
 	rcPar=rc.get.params()
 	track.pos = rc.track.pos(track.id)
 	radius=track.pos['in.pos']

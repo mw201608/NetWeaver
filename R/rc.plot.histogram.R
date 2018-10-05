@@ -20,7 +20,7 @@ rc.plot.histogram=function(Data, track.id, data.col=NULL, color.col=NULL, color.
 		}
 		if((! is.na(Col)) && Col=='white') Col=NA
 		thick=ifelse(fixed.height,custom.track.height,custom.track.height*Data[i,data.col]/max.value)
-		pos.xy <- rc.get.ringCoordinates(track.id,Start=Start,End=End,Chr=Chr,ringThickness=thick)
+		pos.xy <- rc.get.trackCoordinates(track.id,Start=Start,End=End,Chr=Chr,trackThickness=thick)
 		polygon(pos.xy$x, pos.xy$y, col=Col, border=polygon.border);
 	}
 	return(invisible())

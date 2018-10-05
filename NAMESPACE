@@ -21,7 +21,7 @@ export(
 	rc.plot.ribbon,
 	rc.plot.grColLegend,
 	rc.get.coordinates,
-	rc.get.ringCoordinates,
+	rc.get.trackCoordinates,
 	ensemble_rank,
 	is.overlap
 )

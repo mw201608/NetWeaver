@@ -8,7 +8,7 @@ rc.plot.track.bg=function(track.id, bg.color='grey', custom.track.height=NULL){
 		iChr=chromPar[[i]]
 		Start=iChr['Start']
 		End=iChr['End']
-		pos.xy <- rc.get.ringCoordinates(track.id,Start=Start,End=End,Chr=Chr)
+		pos.xy <- rc.get.trackCoordinates(track.id,Start=Start,End=End,Chr=Chr)
 		polygon(pos.xy$x, pos.xy$y, col=bg.color);
 	}
 	return(invisible())

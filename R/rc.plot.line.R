@@ -12,7 +12,7 @@ rc.plot.line=function(Data, track.id, color.col=NULL, custom.length=NULL, arrow.
 			Col=rcPar$color.line
 		}
 		if((! is.na(Col)) && Col=='white') Col=NA
-		pos.xy <- rc.get.ringCoordinates(track.id,Start=Pos,End=Pos,Chr=Chr,ringThickness=custom.length)
+		pos.xy <- rc.get.trackCoordinates(track.id,Start=Pos,End=Pos,Chr=Chr,trackThickness=custom.length)
 		points(pos.xy$x, pos.xy$y, col=Col, type='l', ...);
 		if(arrow.length==0) next
 		arrows(pos.xy$x[1], pos.xy$y[1], x1 = pos.xy$x[2], y1 = pos.xy$y[2],col = Col, length=arrow.length, code=arrow.code, angle=arrow.angle, ...)

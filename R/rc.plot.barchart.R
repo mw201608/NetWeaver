@@ -19,7 +19,7 @@ rc.plot.barchart=function(Data, track.id, data.col, color.col=NULL, bar.color=NU
 		d1=d1/ifelse(ratio,d1[length(d1)],max.value)
 		for(j in rev(jj)){
 			thick <- custom.track.height*d1[j]
-			pos.xy <- rc.get.ringCoordinates(track.id,Start=Start,End=End,Chr=Chr,ringThickness=thick)
+			pos.xy <- rc.get.trackCoordinates(track.id,Start=Start,End=End,Chr=Chr,trackThickness=thick)
 			polygon(pos.xy$x, pos.xy$y, col=bar.color[j], border=polygon.border)
 		}
 	}
