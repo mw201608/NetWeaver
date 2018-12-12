@@ -6,7 +6,7 @@ ensemble_rank=function(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),sm
 	x=as.matrix(x)
 	if(method=='ProductOfRank'){
 		G=apply(x,2,function(y) {z=rank(y,ties.method = 'max');M=max(z);(M+1-z)/M} )
-		S=apply(G,1, prod)
+		S = exp(apply(log(G), 1, sum))
 	}else if(method=='MeanOfLog'){
 		G=-log(x+small)
 		S=rowSums(G,na.rm=TRUE)/ncol(G)
