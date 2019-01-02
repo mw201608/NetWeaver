@@ -5,7 +5,7 @@
   Compute composite rank score using evidence from multiple features.
 }
 \usage{
-  ensemble_rank(x, method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),
+  ensemble_rank(x, method=c('ProductOfRank','MeanOfLog','MeanOfLogLog','Mean'),
   small=1.0e-320, standardize=TRUE)
 }
 \arguments{
@@ -22,6 +22,9 @@ ProductOfRank is the one used in Zhang et al. (Cell 2013, 153: 707-720) with a s
 MeanOfLog computes the mean of -log(p value) which penalizes insignificant p values;
 
 MeanOfLogLog computes the mean of log(-log(p value)) which penalizes insignificant p values and shrinks the difference in the ranges of p values.
+
+Means computes the row mean of absolute values of \code{x}.
+
 }
 \value{
  A vector of ranking scores. The larger the score, the higher the rank.

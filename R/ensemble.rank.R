@@ -1,7 +1,7 @@
 #To compute composite rank score from multiple variables
 #Author: Minghui Wang <m.h.wang@live.com>
 #
-ensemble_rank=function(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),small=1.0e-320,standardize=TRUE){
+ensemble_rank=function(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog','Mean'),small=1.0e-320,standardize=TRUE){
 	method=match.arg(method)
 	x=as.matrix(x)
 	if(method=='ProductOfRank'){
@@ -14,6 +14,8 @@ ensemble_rank=function(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog'),sm
 		G=log(-log(x+small)+small)
 		G[G<0]=0
 		S=rowSums(G,na.rm=TRUE)/ncol(G)
+	}else if(method=='Mean'){
+		G=rowMeans(abs(x),na.rm=TRUE)
 	}
 	if(standardize) S=S/max(S)
 	S
