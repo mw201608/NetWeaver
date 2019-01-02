@@ -15,7 +15,7 @@ ensemble_rank=function(x,method=c('ProductOfRank','MeanOfLog','MeanOfLogLog','Me
 		G[G<0]=0
 		S=rowSums(G,na.rm=TRUE)/ncol(G)
 	}else if(method=='Mean'){
-		G=rowMeans(abs(x),na.rm=TRUE)
+		S=rowMeans(abs(x),na.rm=TRUE)
 	}
 	if(standardize) S=S/max(S)
 	S
