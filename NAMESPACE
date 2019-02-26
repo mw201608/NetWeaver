@@ -23,7 +23,8 @@ export(
 	rc.get.coordinates,
 	rc.get.trackCoordinates,
 	ensemble_rank,
-	is.overlap
+	is.overlap,
+	getrankp
 )
 importFrom("utils", "tail")
 importFrom("grDevices", "colors", "gray.colors", "heat.colors")
