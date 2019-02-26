@@ -26,5 +26,5 @@ Minghui Wang <m.h.wang@live.com>
 }
 \seealso{\code{\link{rc.plot.histogram}}}
 \examples{
-##see example of ?Modules
+#This is not to be run alone. Please see tutorial vignette("netweaver") for usage.
 }

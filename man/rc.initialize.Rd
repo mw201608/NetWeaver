@@ -73,8 +73,8 @@ HistData=data.frame(Chr=paste0('C',1:20), Start=1, End=50, Data=runif(20))
 params$color.hist <- 'black'
 rc.reset.params(params)
 track.num=5
-rc.plot.histogram(HistData, track.num, data.col=4, fixed.height=FALSE, track.border=NA, 
-	custom.track.height=params$track.height*2)
+rc.plot.histogram(HistData, track.num, data.col=4, fixed.height=FALSE, 
+	track.border=NA, custom.track.height=params$track.height*2)
 
 ##plot heatmap on track 6
 HeatData=data.frame(Chr=paste0('C',1:20), Start=1,End=100, Data=1:20)
@@ -84,7 +84,8 @@ rc.plot.histogram(HeatData, track.num, data.col=4, color.gradient=colfuncHeat(50
 	fixed.height=TRUE)
 
 ##plot stacked barchart on track 7
-BarData=data.frame(Chr=paste0('C',1:20), Start=1, End=seq(10,86,length.out=20), Data=matrix(runif(20*4),nrow=20))
+BarData=data.frame(Chr=paste0('C',1:20), Start=1, 
+	End=seq(10,86,length.out=20), Data=matrix(runif(20*4),nrow=20))
 track.num=track.num+1
 rc.plot.barchart(BarData, track.num, data.col=4:7)
 
@@ -102,7 +103,9 @@ rc.plot.ribbon(ribbonData, track.num, color.col='Col', twist=TRUE)
 #label track id
 rc.plot.track.id(2:7, col=2)
 #add text label
-rc.plot.text(data.frame(Chr='C3',Pos=50,Label='GeneX'), track.id=3,srt=45,cex=0.8,col='blue')
+rc.plot.text(data.frame(Chr='C3',Pos=50,Label='GeneX'), 
+	track.id=3,srt=45,cex=0.8,col='blue')
 #add line mark
-rc.plot.line(data.frame(Chr='C19',Pos=seq(10,90,by=15),Col='red'), track.id=3, color.col=3,arrow.length=0.2)
+rc.plot.line(data.frame(Chr='C19',Pos=seq(10,90,by=15),Col='red'), 
+	track.id=3, color.col=3,arrow.length=0.2)
 }

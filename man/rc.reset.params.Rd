@@ -1,5 +1,4 @@
 \name{rc.reset.params}
-\docType{package}
 \alias{rc.reset.params}
 \title{Reset Circos Plot Parameters}
 \description{
@@ -14,5 +13,5 @@ Minghui Wang <m.h.wang@live.com>
 }
 \seealso{\code{\link{rc.initialize}}, \code{\link{rc.get.params}}}
 \examples{
-##not run###
+#This is not to be run alone. Please see tutorial vignette("netweaver") for usage.
 }

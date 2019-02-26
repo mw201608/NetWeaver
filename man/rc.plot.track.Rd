@@ -22,5 +22,5 @@ Minghui Wang <m.h.wang@live.com>
 }
 \seealso{\code{\link{rc.plot.histogram}}, \code{\link{rc.plot.mHistogram}}}
 \examples{
-##see example of rc.initialze() & ?Modules
+#This is not to be run alone. Please see tutorial vignette("netweaver") for usage.
 }

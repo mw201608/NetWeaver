@@ -31,5 +31,5 @@ Minghui Wang <m.h.wang@live.com>
 }
 \seealso{\code{\link{rc.plot.link}}, \code{\link{rc.plot.histogram}}}
 \examples{
-##not run###
+#This is not to be run alone. Please see tutorial vignette("netweaver") for usage.
 }

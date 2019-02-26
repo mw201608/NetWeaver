@@ -24,5 +24,5 @@
 Minghui Wang <m.h.wang@live.com>
 }
 \examples{
-##see example of rc.initialze() & ?Modules
+#This is not to be run alone. Please see tutorial vignette("netweaver") for usage.
 }
