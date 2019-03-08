@@ -1,5 +1,5 @@
 rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, rect.data.min=NULL,rect.data.max=NULL,
-polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,
+polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,show.legend=TRUE,
 legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical'){
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
@@ -111,17 +111,19 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			if(nrow(textData)>0) rc.plot.text(textData, track.id=nLayer-iLayer+2.5, cex=0.6)
 		}
 	}
-	if(is.null(color.vector) && ! is.null(rect.data)){
-		cols=rect.color.func()
-		if(is.numeric(Data[,rect.data])){
-			rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
-			width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
-		}else{
-			legend(legend.x,legend.y,legend=names(cols),pch=19,col=cols)
+	if(show.legend){
+		if(is.null(color.vector) && ! is.null(rect.data)){
+			cols=rect.color.func()
+			if(is.numeric(Data[,rect.data])){
+				rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
+				width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
+			}else{
+				legend(legend.x,legend.y,legend=names(cols),pch=19,col=cols)
+			}
 		}
-	}
-	if(!is.null(color.vector)){
-		legend(legend.x,legend.y,legend=names(color.vector),pch=19,col=color.vector)
+		if(!is.null(color.vector)){
+			legend(legend.x,legend.y,legend=names(color.vector),pch=19,col=color.vector)
+		}
 	}
 }
 #
