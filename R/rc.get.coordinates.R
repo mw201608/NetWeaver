@@ -78,7 +78,7 @@ rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bot
 rc.compute.degree=function(cumLoc){
 #cumLoc, a vector of cumulative locations since first chromosome
 	baseUnits=rc.get.baseUnits()
-	degree = baseUnits$halfPi - cumLoc*baseUnits$unitDegree
+	degree = baseUnits$halfPi - cumLoc*baseUnits$unitDegree - baseUnits$slice.rotate
 	degree
 }
 #compute the x of cumulative locations for landscape Layout
