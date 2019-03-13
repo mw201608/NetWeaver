@@ -51,7 +51,7 @@ Cyto=data.frame(Chr=paste0('C',1:20), Start=1, End=100, BandColor=colors()[2:21]
 #firstly set number of tracks, should be larger than the actual number of tracks
 #used for plotting in order to leave sufficient sapce in the middle
 num.tracks=9 
-#slice size pi/2, rotate pi/6
+#slice size pi*3/4, rotate pi/8
 rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1,slice.size=0.75*pi,slice.rotate=pi/8))
 
 ##retrieve parameters
