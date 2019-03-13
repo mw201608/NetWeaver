@@ -15,7 +15,7 @@ To install the latest development from here in `github`, run `devtools::install_
 
 The above figure is generated from a real data analysis featuring coexpression network modules. The numbers in the out-most ring show the module id 1-50. The barplot in track #1 shows the module ranking score. The heat-map in track #2-5 shows module-trait correlation. The heat-map in the remaining tracks #6-29 show the P value significance of enrichment for various gene signatures.
 Detailed description about the data and sample code is available from
-`vignette("netweaver")` ([link](examples/netweaver.Md)), `?Modules` or ?rc.initialize within `R` after loading the package.
+`vignette("netweaver")` ([link](examples/netweaver.Md)), `?Modules` or `?rc.initialize` within `R` after loading the package.
 
 In general, a typical workflow of a circular track plot includes:
 
