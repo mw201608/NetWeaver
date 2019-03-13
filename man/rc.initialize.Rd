@@ -30,7 +30,7 @@ Additional plot parameters can be specified through argument \code{params}, incl
 \item \code{track.padding}, paddings between tracks is a fraction of the track height, default 0.1
 \item \code{track.height}, track height, default 0.15.
 \item \code{radius} radius of the circos, default 1.
-\item \code{sector.degree}, a value between 0 and \code{2*Pi} (the default) specifying the circular sector size of the circos plot.
+\item \code{slice.degree}, a value between 0 and \code{2*Pi} (the default) specifying the circular slice size of the circos plot.
 }
 After initialization, the parameter settings can be retrieved by \code{\link{rc.get.params}}.
 
