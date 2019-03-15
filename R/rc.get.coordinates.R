@@ -8,13 +8,13 @@ rc.get.trackCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,trackTh
 	track.pos = rc.track.pos(track.id)
 	if(is.null(trackThickness)) trackThickness=rc.get.params()$track.height
 	if(rcPar$Layout=='circular'){
+		baseUnits=rc.get.baseUnits()
 		if(is.null(degree)){
 			apos=0
 			if(! is.null(Chr)) apos=rc.get.cumLoc(Chr,0)
 			cumStart=Start+apos-1
 			cumEnd=End+apos
 			#
-			baseUnits=rc.get.baseUnits()
 			cumLoc=seq(cumStart,cumEnd,by=baseUnits$stepSize)
 			degree=rc.compute.degree(cumLoc)
 		}else{
@@ -27,8 +27,8 @@ rc.get.trackCoordinates=function(track.id,Start,End,Chr=NULL,degree=NULL,trackTh
 		inner.location=track.pos['in.pos']
 		outer.location=inner.location+trackThickness
 		#
-		pos.x <- c(xCos*outer.location, rev(xCos)*inner.location);
-		pos.y <- c(ySin*outer.location, rev(ySin)*inner.location);
+		pos.x <- c(xCos*outer.location, rev(xCos)*inner.location)-baseUnits$origin['x'];
+		pos.y <- c(ySin*outer.location, rev(ySin)*inner.location)-baseUnits$origin['y'];
 		return(list(x=pos.x,y=pos.y))
 	}
 	pos.x <- c(rc.compute.x.landscape(rc.get.cumLoc(Chr,Start)),rc.compute.x.landscape(rc.get.cumLoc(Chr,End)))
@@ -54,6 +54,7 @@ rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bot
 	rcPar=rc.get.params()
 	track.pos = rc.track.pos(track.id)
 	if(rcPar$Layout=='circular'){
+		baseUnits=rc.get.baseUnits()
 		radius=track.pos[ifelse(innerSide,'in.pos','out.pos')]
 		if(is.null(degree)){
 			if(is.null(Pos)) stop('Either degree or Pos must be specified.\n')
@@ -65,8 +66,8 @@ rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bot
 		}
 		xCos=cos(degree)
 		ySin=sin(degree)
-		pos.x <- xCos*radius;
-		pos.y <- ySin*radius;
+		pos.x <- xCos*radius-baseUnits$origin['x'];
+		pos.y <- ySin*radius-baseUnits$origin['y'];
 		return(list(x=pos.x,y=pos.y))
 	}
 	if(is.null(Chr) || is.null(Pos)) stop('Both Chr and Pos must be specified.\n')
@@ -78,7 +79,7 @@ rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bot
 rc.compute.degree=function(cumLoc){
 #cumLoc, a vector of cumulative locations since first chromosome
 	baseUnits=rc.get.baseUnits()
-	degree = baseUnits$halfPi - cumLoc*baseUnits$unitDegree - baseUnits$slice.rotate
+	degree = baseUnits$halfPi - cumLoc*baseUnits$unitDegree - baseUnits$slice.rotate.radian
 	degree
 }
 #compute the x of cumulative locations for landscape Layout

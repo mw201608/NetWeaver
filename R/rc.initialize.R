@@ -20,7 +20,17 @@ rc.initialize=function(cyto.info,num.tracks=NULL,chr.order=NULL,stepUnit=10^7,La
 	rcEnvirInternal[["cyto.info"]] <- rc.set.cytoband(cyto.info) #set cyto band color
 	rcEnvirInternal[["rcParams"]] <- params
 	rcEnvirInternal[["chromPar"]] <- cPar$chromPar
-	#stepSize, the size of move along the chromosomes when plotting
-	rcEnvirInternal[["baseUnits"]] <- list(halfPi=pi/2,slice.size=params$slice.size,slice.rotate=params$slice.rotate,unitDegree=params$slice.size/cPar$totalLen,unitLenX=params$default.x.length/cPar$totalLen,totalChrLength=cPar$totalLen,stepSize=ceiling(cPar$totalLen/stepUnit))
+	sdeg=90-params$slice.rotate
+	edeg=360-seq(0,params$slice.size) + sdeg
+	edeg=ifelse(edeg>360,edeg - 360, edeg)
+	edeg=edeg*pi/180
+	x1=params$radius * cos(edeg)
+	y1=params$radius * sin(edeg)
+	origin=c(x=(min(x1)+max(x1))/2,y=(min(y1)+max(y1))/2)
+	#stepSize, the step size of moving along the chromosomes when plotting
+	rcEnvirInternal[["baseUnits"]] <- list(halfPi=pi/2,slice.size.radian=params$slice.size*pi/180,
+		slice.rotate.radian=params$slice.rotate*pi/180,unitDegree=params$slice.size*pi/180/cPar$totalLen,
+		unitLenX=params$default.x.length/cPar$totalLen,totalChrLength=cPar$totalLen,origin=origin,
+		stepSize=ceiling(cPar$totalLen/stepUnit))
 	return(invisible())
 }

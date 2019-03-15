@@ -24,9 +24,10 @@ rc.params.default=function(...){
 	if(is.null(params$num.tracks)) params$num.tracks = params$default.tracks
 	if(is.null(params$track.height)) params$track.height=params$default.track.height
 	if(is.null(params$radius)) params$radius = params$default.radius
-	if(is.null(params$slice.size)) params$slice.size = 2*pi
+	if(is.null(params$slice.size)) params$slice.size = 360
 	if(is.null(params$slice.rotate)) params$slice.rotate = 0
-	params$slice.size=min(params$slice.size,2*pi)
+	params$slice.rotate = params$slice.rotate %% 360
+	params$slice.size=min(params$slice.size,360)
 	#
 	params
 }

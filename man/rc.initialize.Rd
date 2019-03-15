@@ -30,8 +30,8 @@ Additional plot parameters can be specified through argument \code{params}, incl
 \item \code{track.padding}, paddings between tracks is a fraction of the track height, default 0.1
 \item \code{track.height}, track height, default 0.15.
 \item \code{radius} radius of the circos, default 1.
-\item \code{slice.size}, a value between 0 and \code{2*Pi} (the default) specifying the circular slice size of the circos plot.
-\item \code{slice.rotate}, a value between 0 (the default) and \code{2*Pi} specifying the degree to rotate in a clock-wise direction.
+\item \code{slice.size}, a value between 0 and 360 (degree, default 360) specifying the circular slice size of the circos plot.
+\item \code{slice.rotate}, a value between 0 (the default) and 360 specifying the degree to rotate in a clock-wise direction.
 }
 After initialization, the parameter settings can be retrieved by \code{\link{rc.get.params}}.
 
@@ -51,8 +51,8 @@ Cyto=data.frame(Chr=paste0('C',1:20), Start=1, End=100, BandColor=colors()[2:21]
 #firstly set number of tracks, should be larger than the actual number of tracks
 #used for plotting in order to leave sufficient sapce in the middle
 num.tracks=9 
-#slice size pi*3/4, rotate pi/8
-rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1,slice.size=0.75*pi,slice.rotate=pi/8))
+#slice size 135 degree, rotate 22.5 degree
+rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1,slice.size=135,slice.rotate=22.5))
 
 ##retrieve parameters
 params=rc.get.params()
