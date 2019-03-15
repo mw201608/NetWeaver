@@ -78,7 +78,7 @@ rc.initialize(cyto, num.tracks=36, params=list(chr.padding=0.1))
 ```
 through which we specify the canvas to have 36 tracks, which are larger than the number of columns of input data in order to leave sufficient sapce in the middle of the diagram.
 
-In some cases, we may want to show a subset of modules in a slice rather than the 360 degree circular plot. To create a slice view of a subset (say top 15) of the modules, we can first subset the data `Modules=Modules[1:15,]; cyto=cyto[1:15,]`. Then we initialize parameters by setting a value of less than 360 for parameter `slice.size`, e.g., `rc.initialize(cyto, num.tracks=36, params=list(chr.padding=0.1, slice.size=90))`.
+In some cases, we may want to show a subset of modules in a slice (such as [this example](https://github.com/mw201608/NetWeaver/blob/master/ex1.circular.slice.png)) rather than the 360 degree circular plot. To create a slice view of a subset (say top 15) of the modules, we can first subset the data `Modules=Modules[1:15,]; cyto=cyto[1:15,]`. Then we initialize parameters by setting a value of less than 360 for parameter `slice.size`, e.g., `rc.initialize(cyto, num.tracks=36, params=list(chr.padding=0.1, slice.size=90))`.
 
 After initialization, the plot parameters can be retrieved by
 ```{r}
