@@ -34,10 +34,17 @@ rc.plot.link=function(Data, track.id, data.col=NULL, color.col = NULL, max.lwd=1
 		lines(links$pos.x-baseUnits$origin['x'], links$pos.y-baseUnits$origin['y'], type = "l", col = link.colors[i], lwd=lwd[i],...)
 		if(arrow.length==0) next
 		n1=length(links$pos.x)
-		n2=max(0,n1-1)
+		n2=max(1,n1-1)
 		if(swap[i]){n1=1;n2=2}
 		arrows(links$pos.x[n2]-baseUnits$origin['x'], links$pos.y[n2]-baseUnits$origin['y'], x1 = links$pos.x[n1]-baseUnits$origin['x'], y1 = links$pos.y[n1]-baseUnits$origin['y'],col = link.colors[i], lwd=lwd[i],length=arrow.length,angle=arrow.angle,...)
 	}
+}
+findBestArrowPosition=function(x,y,dsize,swap,tol=0.001){ #arraow length must be no less than 1/1000 inch
+	n1=ifelse(swap,1,length(x))
+	n2=which(sqrt((x-x[n1])^2+(y-y[n1])^2)*dsize > tol)
+	if(length(n2)==0) return(NA)
+	n2=ifelse(swap,min(n2),max(n2))
+	n2
 }
 rc.link.line=function(P0, P2, mtx2, tx2){
 	link.x <- mtx2 * P0[1] + tx2 * P2[1]
