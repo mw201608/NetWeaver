@@ -104,3 +104,9 @@ y2[1]=y2[401]=y2[402]=y2[802]=0
 polygon(x2,y2, col = cols[1+length(dat)],border = NA)
 text(0,0,labels='R',cex=2,col='white')
 ```
+
+### Example 3: Sunburst plot application
+
+<img src="https://github.com/mw201608/sunburst.shiny/blob/master/ex1.png" width="500px">
+
+Please see https://github.com/mw201608/sunburst.shiny
