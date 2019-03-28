@@ -2,6 +2,7 @@ rc.plot.link=function(Data, track.id, data.col=NULL, color.col = NULL, max.lwd=1
 	rc.check.linkData(Data,data.col,color.col)
 	rcPar=rc.get.params()
 	chromPar=rc.get.chrom()
+	baseUnits=rc.get.baseUnits()
 	#
 	if(sort.links) Data=rc.link.sort(Data)
 	#
@@ -25,17 +26,17 @@ rc.plot.link=function(Data, track.id, data.col=NULL, color.col = NULL, max.lwd=1
 	}
 	swap=data.points[, 1]>data.points[, 2] #whether to swap start and end
 	data.points[swap,c(1,2)]=data.points[swap,c(2,1)]
-	P0 <- do.call(cbind,rc.get.coordinates(track.id,Pos=data.points[,1],innerSide=FALSE))
-	P2 <- do.call(cbind,rc.get.coordinates(track.id,Pos=data.points[,2],innerSide=FALSE))
+	P0 <- do.call(cbind,rc.get.coordinates(track.id,Pos=data.points[,1],innerSide=FALSE,adjust.origin=FALSE))
+	P2 <- do.call(cbind,rc.get.coordinates(track.id,Pos=data.points[,2],innerSide=FALSE,adjust.origin=FALSE))
 	bc.point.num = 1000; tx=seq(0, 1, length.out=bc.point.num); mtx2=(1 - tx)^2; tx2=tx^2
 	for (i in 1:nrow(data.points)) {
 		links <- rc.link.line(P0[i,], P2[i,], mtx2=mtx2, tx2=tx2)
-		lines(links$pos.x, links$pos.y, type = "l", col = link.colors[i], lwd=lwd[i],...)
+		lines(links$pos.x-baseUnits$origin['x'], links$pos.y-baseUnits$origin['y'], type = "l", col = link.colors[i], lwd=lwd[i],...)
 		if(arrow.length==0) next
 		n1=length(links$pos.x)
 		n2=max(0,n1-1)
 		if(swap[i]){n1=1;n2=2}
-		arrows(links$pos.x[n2], links$pos.y[n2], x1 = links$pos.x[n1], y1 = links$pos.y[n1],col = link.colors[i], lwd=lwd[i],length=arrow.length,angle=arrow.angle,...)
+		arrows(links$pos.x[n2]-baseUnits$origin['x'], links$pos.y[n2]-baseUnits$origin['y'], x1 = links$pos.x[n1]-baseUnits$origin['x'], y1 = links$pos.y[n1]-baseUnits$origin['y'],col = link.colors[i], lwd=lwd[i],length=arrow.length,angle=arrow.angle,...)
 	}
 }
 rc.link.line=function(P0, P2, mtx2, tx2){

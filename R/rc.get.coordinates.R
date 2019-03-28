@@ -50,7 +50,7 @@ rc.get.cumLoc=function(Chr,pos){
 	pos
 }
 #compute the coordinates of a cumulative location in a track
-rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bottomSide=TRUE){
+rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bottomSide=TRUE,adjust.origin=TRUE){
 	rcPar=rc.get.params()
 	track.pos = rc.track.pos(track.id)
 	if(rcPar$Layout=='circular'){
@@ -66,8 +66,12 @@ rc.get.coordinates=function(track.id,Pos,Chr=NULL,degree=NULL,innerSide=TRUE,bot
 		}
 		xCos=cos(degree)
 		ySin=sin(degree)
-		pos.x <- xCos*radius-baseUnits$origin['x'];
-		pos.y <- ySin*radius-baseUnits$origin['y'];
+		pos.x <- xCos*radius
+		pos.y <- ySin*radius
+		if(adjust.origin){
+			pos.x <- pos.x-baseUnits$origin['x'];
+			pos.y <- pos.y-baseUnits$origin['y'];
+		}
 		return(list(x=pos.x,y=pos.y))
 	}
 	if(is.null(Chr) || is.null(Pos)) stop('Both Chr and Pos must be specified.\n')
