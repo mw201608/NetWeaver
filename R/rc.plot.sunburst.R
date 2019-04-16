@@ -6,6 +6,14 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	if(is.null(root)){
 		root <- Data$parent[!Data$parent %in% Data$child[Data$parent != Data$child]]
 		root=unique(root)
+	}else{
+		all1=unique(root)
+		while(TRUE){
+			all2=union(all1,Data$child[Data$parent %in% all1])
+			if(length(all1)==length(all2)) break
+			all1=all2
+		}
+		Data=Data[Data$parent %in% all1,]
 	}
 	#
 	nodes=union(Data$parent,Data$child)
@@ -43,6 +51,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			}
 		}
 	}
+	print(nodes[nodes$Node=='M2',])
 	#
 	Data$layer=NA
 	nLayer=Data$layer[Data$parent %in% root]=2 #root has layer 1
@@ -54,7 +63,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 		nLayer=nLayer+1
 		Data$layer[j]=nLayer
 	}
-	if(any(is.na(Data$layer))) stop('Orphan leaf node(s) found probably due to invalid setting of root node.\n')
+	if(any(is.na(Data$layer))) stop('Orphan leaf node(s) found, probably due to invalid setting of root node.\n')
 	#compute DS size
 	for(iLayer in nLayer:2){
 		i = which(Data$layer==iLayer)
@@ -68,6 +77,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	colnames(Cyto1)=c('Chr','End')
 	Cyto1$Start=1;Cyto1$BandColor=nodes[Cyto1$Chr,'color.col'];Cyto1$Layer=1
 	rownames(Cyto1)=Cyto1$Chr
+	print(Cyto1)
 	#
 	rc.initialize(Cyto1, num.tracks=nLayer, params=list(chr.padding=0,track.padding=0,color.hist=NA))
 	rc.plot.area()
