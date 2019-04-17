@@ -18,7 +18,6 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	#
 	nodes=union(Data$parent,Data$child)
 	nodes=data.frame(Node=nodes,Leaf=(!nodes %in% Data$parent),stringsAsFactors = FALSE)
-	Data=Data[Data$parent != Data$child,]
 	nodes$DS=1
 	rownames(nodes)=nodes$Node
 	d1=NA
@@ -51,7 +50,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			}
 		}
 	}
-	print(nodes[nodes$Node=='M2',])
+	Data=Data[Data$parent != Data$child,]
 	#
 	Data$layer=NA
 	nLayer=Data$layer[Data$parent %in% root]=2 #root has layer 1
@@ -77,7 +76,6 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	colnames(Cyto1)=c('Chr','End')
 	Cyto1$Start=1;Cyto1$BandColor=nodes[Cyto1$Chr,'color.col'];Cyto1$Layer=1
 	rownames(Cyto1)=Cyto1$Chr
-	print(Cyto1)
 	#
 	rc.initialize(Cyto1, num.tracks=nLayer, params=list(chr.padding=0,track.padding=0,color.hist=NA))
 	rc.plot.area()
