@@ -1,4 +1,4 @@
-## NetWeaver [![CRAN](http://www.r-pkg.org/badges/version/NetWeaver)](https://cran.r-project.org/package=NetWeaver) [![Downloads](http://cranlogs.r-pkg.org/badges/NetWeaver?color=brightgreen)](http://www.r-pkg.org/pkg/NetWeaver)
+## NetWeaver [![CRAN](http://www.r-pkg.org/badges/version/NetWeaver)](https://cran.r-project.org/package=NetWeaver) [![Downloads](http://cranlogs.r-pkg.org/badges/NetWeaver?color=brightgreen)](http://www.r-pkg.org/pkg/NetWeaver) [![Total downloads]( https://cranlogs.r-pkg.org/badges/grand-total/NetWeaver)](http://www.r-pkg.org/pkg/NetWeaver)
 
 #### Current version 0.0.7
 
