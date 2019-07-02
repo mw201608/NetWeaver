@@ -1,6 +1,6 @@
 rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, rect.data.min=NULL,rect.data.max=NULL,
 polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,show.legend=TRUE,
-legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical'){
+legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical',rotate=0,highlight.ids=NULL){
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
 	if(is.null(root)){
@@ -70,6 +70,22 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 		nodes[names(c1),'DS']=c1
 	}
 	#
+	if(!is.null(highlight.ids)){
+		highlight.ids=highlight.ids[highlight.ids %in% nodes$Node]
+		nhighlight=length(highlight.ids)
+		if(nhighlight>0){
+			while(TRUE){
+				highlight.ids=union(highlight.ids,Data$child[Data$parent %in% highlight.ids])
+				n111=length(highlight.ids)
+				if(n111==nhighlight) break
+				nhighlight=n111
+			}
+		}
+	}else{
+		highlight.ids=nodes$Node
+	}
+	nodes$color.col[!nodes$Node %in% highlight.ids]=NA
+	#
 	#library(NetWeaver)
 	options(stringsAsFactors=FALSE)
 	Cyto1=nodes[nodes$Node %in% root,c('Node','DS')]
@@ -77,7 +93,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	Cyto1$Start=1;Cyto1$BandColor=nodes[Cyto1$Chr,'color.col'];Cyto1$Layer=1
 	rownames(Cyto1)=Cyto1$Chr
 	#
-	rc.initialize(Cyto1, num.tracks=nLayer, params=list(chr.padding=0,track.padding=0,color.hist=NA))
+	rc.initialize(Cyto1, num.tracks=nLayer, params=list(chr.padding=0,track.padding=0,color.hist=NA,slice.rotate=rotate))
 	rc.plot.area()
 	for(iLayer in 1:nLayer){
 		if(iLayer==1){
