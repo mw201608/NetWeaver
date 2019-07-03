@@ -1,6 +1,9 @@
 rc.plot.sunburst=function(Data, root=NULL, color.vector=NULL, rect.color.func=function(n=20) rev(heat.colors(n)), rect.data=NULL, rect.data.cutoff=NULL, rect.data.min=NULL,rect.data.max=NULL,
 polygon.border=NULL, show.label=FALSE, show.label.selected=NULL,show.legend=TRUE,
 legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color',legend.cex.text=1,legend.cex.title=1.2,legend.direction='vertical',rotate=0,highlight.ids=NULL){
+#if both color.vector and rect.data are NULL, no color will be filled in each block
+#if is.null(color.vector), when Data[,rect.data] is numeric, rect.color.func should usually provide a vector of gradient colors and block color will be computed based on percentile of Data[,rect.data]
+#if is.null(color.vector), when Data[,rect.data] is NOT numeric (i.e. character), rect.color.func should usually return a named vector of colors with names from the factor levels of Data[,rect.data]
 	stopifnot(is.data.frame(Data))
 	colnames(Data)[1:2]=c('child','parent')
 	if(is.null(root)){
@@ -23,30 +26,32 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	d1=NA
 	if(!is.null(rect.data)){
 		d1=Data[match(nodes$Node,Data$child),rect.data]
-		if(is.null(rect.data.min)){
-			rect.data.min <- min(d1,na.rm=TRUE)
-			rect.data.min <- floor(rect.data.min)
+		if(is.numeric(d1)){
+			if(is.null(rect.data.min)){
+				rect.data.min <- min(d1,na.rm=TRUE)
+				rect.data.min <- floor(rect.data.min)
+			}
+			if(is.null(rect.data.max)){
+				rect.data.max <- max(d1,na.rm=TRUE)
+				rect.data.max <- ceiling(rect.data.max)
+			}
+			d1[d1<rect.data.min]=rect.data.min
+			d1[d1>rect.data.max]=rect.data.max
 		}
-		if(is.null(rect.data.max)){
-			rect.data.max <- max(d1,na.rm=TRUE)
-			rect.data.max <- ceiling(rect.data.max)
-		}
-		d1[d1<rect.data.min]=rect.data.min
-		d1[d1>rect.data.max]=rect.data.max
 	}
 	if(!is.null(color.vector)){
 		nodes=data.frame(nodes,color.col=color.vector[nodes$Node],rect.data=d1,stringsAsFactors = FALSE)
 	}else{
 		if(is.null(rect.data)){
-			nodes=data.frame(nodes,color.col=sample(rect.color.func(nrow(nodes))),rect.data=NA,stringsAsFactors = FALSE)
+			nodes=data.frame(nodes,color.col=NA,rect.data=NA,stringsAsFactors = FALSE)
 		}else{
-			if(is.numeric(Data[,rect.data])){
+			if(is.numeric(d1)){
 				ncolors=length(rect.color.func())
 				d2=ceiling((d1-rect.data.min)*ncolors/(rect.data.max-rect.data.min))
 				d2[which(d2==0)]=1
 				nodes=data.frame(nodes,color.col=rect.color.func()[d2],rect.data=d1,stringsAsFactors = FALSE)
 			}else{
-				nodes=data.frame(nodes,color.col=rect.color.func()[Data[,rect.data]],rect.data=d1,stringsAsFactors = FALSE)
+				nodes=data.frame(nodes,color.col=rect.color.func()[d1],rect.data=d1,stringsAsFactors = FALSE)
 			}
 		}
 	}
