@@ -38,7 +38,7 @@ rc.plot.ideogram=function(track.ids, plot.band=TRUE, plot.chromosome.id=TRUE, ch
 		}
 		pos=c(mean(pos.xy$x),mean(pos.xy$y))
 		text(pos[1], pos[2], label = Chr,col=color.chromosome.id[Chr],
-			srt = srt, cex=cex.text)
+			srt = srt, cex=cex.text,pos=4,offset=0)
 	}
 	return(invisible())
 }

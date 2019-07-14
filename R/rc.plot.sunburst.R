@@ -147,11 +147,11 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 				rc.plot.grColLegend(x=legend.x, y=legend.y, cols=cols, at=c(1,floor(length(cols)/2),length(cols)),legend=c(rect.data.min,ceiling((rect.data.max+rect.data.min)/2),rect.data.max),
 				width=legend.width,height=legend.height,title=legend.title,cex.title=legend.cex.title,cex.text=legend.cex.text,direction=legend.direction)
 			}else{
-				legend(legend.x,legend.y,legend=names(cols),pch=19,col=cols)
+				legend(legend.x,legend.y,legend=names(cols),pch=19,col=cols,title=legend.title,cex=legend.cex.text)
 			}
 		}
 		if(!is.null(color.vector)){
-			legend(legend.x,legend.y,legend=names(color.vector),pch=19,col=color.vector)
+			legend(legend.x,legend.y,legend=names(color.vector),pch=19,col=color.vector,title=legend.title,cex=legend.cex.text)
 		}
 	}
 }
