@@ -41,10 +41,10 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 	}
 	if(!is.null(color.vector)){
 		nodes=data.frame(nodes,color.col=color.vector[nodes$Node],rect.data=d1,stringsAsFactors = FALSE)
+		if(is.null(polygon.border)) polygon.border=NA
 	}else{
 		if(is.null(rect.data)){
 			nodes=data.frame(nodes,color.col=NA,rect.data=NA,stringsAsFactors = FALSE)
-			if(is.null(polygon.border)) polygon.border=NA
 		}else{
 			if(is.numeric(d1)){
 				ncolors=length(rect.color.func())
@@ -54,6 +54,7 @@ legend.x=0.8,legend.y=0.9,legend.width=0.1,legend.height=0.3,legend.title='Color
 			}else{
 				nodes=data.frame(nodes,color.col=rect.color.func()[d1],rect.data=d1,stringsAsFactors = FALSE)
 			}
+			if(is.null(polygon.border)) polygon.border=NA
 		}
 	}
 	Data=Data[Data$parent != Data$child,]
