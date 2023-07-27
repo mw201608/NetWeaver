@@ -22,7 +22,7 @@ rc.plot.grColLegend=function(x,y,cols,at=NULL,legend=at,title='Color',width=0.1,
 		}
 		text(x+width/2,y+height,labels=title,pos=3,cex=cex.title)
 		for(j in 1:length(at)){
-			text(x+gap*(at[j]-1)+hunit*(at[j]-1),y,labels=legend[j],pos=1,cex=cex.text)
+			text(x+gap*(at[j]-1)+hunit*(at[j]-0.5),y,labels=legend[j],pos=1,cex=cex.text)
 			lines(rep(x+gap*(at[j]-1)+hunit*(at[j]-0.5),2),c(y, y-height/5))
 		}
 	}
