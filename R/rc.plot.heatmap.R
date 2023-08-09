@@ -4,7 +4,8 @@ rc.plot.heatmap=function(Data, track.id, color.gradient=NULL, track.color=NA, tr
 	chromPar=rc.get.chrom()
 	if(!is.null(color.gradient)){
 		mx=max(Data,na.rm=TRUE)
-		cols=apply(Data,2,function(x,color.gradient,mx) color.gradient[pmax(1,floor(x*length(color.gradient)/mx))],color.gradient=color.gradient,mx=mx)
+		cols = apply(Data,2,function(x,color.gradient,mx) color.gradient[pmax(1,floor(x*length(color.gradient)/mx))],color.gradient=color.gradient,mx=mx)
+		if(nrow(Data) == 1) cols = matrix(cols, nrow = 1)
 	}
 	HistData=data.frame(Chr=colnames(Data), Start=1, End=100, Data=NA, Col=NA, stringsAsFactors=FALSE)
 	for(i in 1:nrow(HistData)){
