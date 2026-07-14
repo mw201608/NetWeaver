@@ -1,8 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ex1.circular.png
+ex1.circular.slice.png
 ex2.donut.png
 _config.yml
 README.md
 mqtl.md
 examples
+.git
+.github
+R/rc.plot.sunburst.R
+R/rc.plot.sunburst2.R

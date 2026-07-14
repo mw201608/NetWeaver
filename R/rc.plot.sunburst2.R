@@ -1,6 +1,6 @@
 rc.plot.sunburst2=function(Data, root=NULL){
 	stopifnot(is.data.frame(Data))
-	library('ggplot2')
+	requireNamespace('ggplot2')
 	colnames(Data)[1:2] <- c('child', 'parent')
 	if(is.null(root)){
 		root <- Data$parent[!Data$parent %in% Data$child[Data$parent != Data$child]]
@@ -15,7 +15,7 @@ rc.plot.sunburst2=function(Data, root=NULL){
 		Data <- Data[Data$parent %in% all1, ]
 	}
 	#
-    df1 <- df0(x = 0.5, y = 1 : length(root) - 0.5, val = root, w = 1, h = 1)
+    df1 <- data.frame(x = 0.5, y = 1 : length(root) - 0.5, val = root, w = 1, h = 1, stringsAsFactors = FALSE)
 	cur <- root
 	while(TRUE){
 		new <- c()
@@ -28,7 +28,7 @@ rc.plot.sunburst2=function(Data, root=NULL){
 			d1 <- df1[df1[, 'val'] == c1, ]
 			h1 <- d1[, 'h'] / n
 			y1 <- c(d1[, 'y'] - d1[, 'h']/2) + h1 * c(1:n) - h1 / 2
-			df1 <- rbind(df1, df0(x = d1[, 'x'] + 1, y = y1, val = Data[i, 'child'], w = 1, h = h1))
+			df1 <- rbind(df1, data.frame(x = d1[, 'x'] + 1, y = y1, val = Data[i, 'child'], w = 1, h = h1, stringsAsFactors = FALSE))
 		}
 		if(length(new) == 0 ) break
 		cur <- new

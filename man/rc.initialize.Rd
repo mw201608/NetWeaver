@@ -52,7 +52,8 @@ Cyto=data.frame(Chr=paste0('C',1:20), Start=1, End=100, BandColor=colors()[2:21]
 #used for plotting in order to leave sufficient sapce in the middle
 num.tracks=9 
 #slice size 135 degree, rotate 22.5 degree
-rc.initialize(Cyto, num.tracks=num.tracks, params=list(chr.padding=0.1,slice.size=135,slice.rotate=22.5))
+rc.initialize(Cyto, num.tracks=num.tracks, 
+	params=list(chr.padding=0.1,slice.size=135,slice.rotate=22.5))
 
 ##retrieve parameters
 params=rc.get.params()

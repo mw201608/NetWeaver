@@ -17,7 +17,7 @@
  \item{cex.text}{numeric, scale of text.}
  \item{track.border}{the color to draw the track border. Use NA to omit borders.}
  \item{polygon.border}{the color to draw the polygon border. See explanation for \code{\link[graphics]{polygon}}.}
- \item{las}{numeric in {0,1,2,3}; the style of chromosome labels. 0, always parallel to the track [default]; 1, always horizontal; 2, always perpendicular to the track; 3, always vertical.}
+ \item{las}{numeric value in \code{0,1,2,3}; the style of chromosome labels. 0, always parallel to the track [default]; 1, always horizontal; 2, always perpendicular to the track; 3, always vertical.}
  \item{custom.track.height}{NULL or numeric, specifying customized track height when plotting cyto band.}
 }
 \author{

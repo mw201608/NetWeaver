@@ -29,7 +29,7 @@ The original version of this package was developed for Figure 7 of Wang et al (2
 
 1. Wang M, Roussos P, McKenzie A, Zhou X, Kajiwara Y, Brennand K, DeLuca GC, Crary JF, Casaccia P, Buxbaum J et al. 2016. Integrative Network Analysis of Nineteen Brain Regions Identifies Molecular Signatures and Networks Underlying Selective Regional Vulnerability to Alzheimer`s Disease. *Genome Medicine* 8: 104.
 
-2. Wang M, Zhang B, 2016. NetWeaver: Graphic Presentation of Complex Genomic and Network Data Analysis [computer software]. [doi:10.7303/syn7898789](http://dx.doi.org/doi:10.7303/syn7898789).
+2. Wang M, Zhang B, 2016. NetWeaver: Graphic Presentation of Complex Genomic and Network Data Analysis [computer software]. [https://github.com/mw201608/NetWeaver/](https://github.com/mw201608/NetWeaver/).
 
 ## Case study: gene coexpression network modules
 

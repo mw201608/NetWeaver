@@ -1,10 +1,15 @@
 Package: NetWeaver
 Type: Package
 Title: Graphic Presentation of Complex Genomic and Network Data Analysis
-Version: 0.0.9
-Date: 2023-07-27
-Author: Minghui Wang, Bin Zhang
-Maintainer: Minghui Wang <m.h.wang@live.com>
+Version: 1.0.0
+Date: 2026-07-14
+Authors@R: c(person(given = "Minghui",
+                        family = "Wang",
+                        role = c("aut", "cre"),
+                        email = "m.h.wang@live.com"),
+                 person(given = "Bin",
+                        family = "Zhang",
+                        role = "aut"))
 Description: Implements various simple function utilities and flexible pipelines to generate circular images for visualizing complex genomic and network data analysis features.
 Depends: R (>= 3.3.0)
 License: GPL-3
