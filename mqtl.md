@@ -6,7 +6,7 @@
 Here I will demonstrate how to use `NetWeaver` to make a typical circos plot illustrating the genome-wide DNA methylation quantitative trait loci (mQTLs).
 The mQTLs dataset that I am going to use was from Hannon et al (PMID 2661935) which studied the human fetal brain DNA methylation levels.
 I downloaded the imputed set of mQTLs at link https://epigenetics.essex.ac.uk/mQTL/. There are 658492 SNP-methylation probe pairs in this dataset.
-For simplicity, only the top 1000 most significant pairs will be used in this demonstration. You may load this preprocessed mQTLs data by:
+For simplicity, only the top 1000 most significant pairs that have SNPs and probes located on different chromosomes will be used in this demonstration. You may load this preprocessed mQTLs data by:
 ```
 library(NetWeaver)
 load(mqtl)
@@ -28,7 +28,7 @@ rc.initialize(ucsc.hg19.cytoband, num.tracks=16, params=list(chr.padding=0.1))
 rc.plot.area(size=0.9)
 ```
 
-Plot ideogram and chromosome ids at track 1 and 2
+Plot ideogram and chromosome ids at track 1 and 2. This step is slow.
 ```
 rc.plot.ideogram(track.id=1:2, plot.band=TRUE, plot.chromosome.id=TRUE)
 ```
@@ -51,9 +51,10 @@ Plot color bar for each chromosome.
 ```
 chr.color=do.call(rbind,lapply(split(ucsc.hg19.cytoband,ucsc.hg19.cytoband$Chr),function(x) data.frame(Chr=x$Chr[1],Start=1,End=max(x$End),stringsAsFactors=FALSE)))
 chr.color$Color=chr.factor2color[as.integer(factor(chr.color$Chr,levels=chromosomes))]
-rc.plot.barchart(chr.color, track.id=1, color.col="Color", custom.track.height=rc.get.params()$track.height/3, track.border=NA)
+chr.color$Data=1
+rc.plot.barchart(chr.color, track.id=1, data.col = "Data", color.col="Color", custom.track.height=rc.get.params()$track.height/3, track.border=NA)
 ```
 
-Lastly, plot the links:
+Lastly, plot the links (not all links are shown, to be fixed):
 ```
 rc.plot.link(LinkData, track.id=4, data.col=5,color.col=6)
